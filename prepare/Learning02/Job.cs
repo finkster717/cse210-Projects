@@ -10,6 +10,3 @@ public class Job
         Console.WriteLine($"{_jobTitle} ({_company}) {_startYear}-{_endYear}");
     }
 }
-
-//Software Engineer (Microsoft) 2019-2022
-//Manager (Apple) 2022-2023
