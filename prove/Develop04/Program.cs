@@ -4,6 +4,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop04 World!");
+        Console.Clear(); // Just because I like a clean terminal
+        Console.WriteLine(); // and a space before my program starts
+
+        
     }
 }
