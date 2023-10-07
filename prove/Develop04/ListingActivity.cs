@@ -6,7 +6,7 @@ public class ListingActivity : Activity
     public ListingActivity() : base()
     {
         _name = "Listing Activity";
-        _description = "This activity will help you reflect on the good things in your life by having you list your thoughts on a random prompt.";
+        _description = "This activity will help you reflect on the good things in your life by having you list your answers to a random prompt.";
         _duration = 0;
     }
 
@@ -44,14 +44,14 @@ public class ListingActivity : Activity
         Console.WriteLine("List as many responses as you can to the given prompt:");
         Console.WriteLine($"---{_prompt}---");
         Console.Write("You may begin in: ");
-        ShowCountDown(10);
-        Console.Write("Begin");
+        ShowCountDown(9);
+        Console.WriteLine("\b Begin");
         // Begin the listing activity for the duration specified
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(_duration);
         while (DateTime.Now <= endTime)
         {
-            Console.WriteLine(">");
+            Console.Write(">");
             Console.ReadLine();
         }
     }
