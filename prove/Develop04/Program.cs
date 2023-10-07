@@ -18,14 +18,22 @@ class Program
             Console.WriteLine("\t3. Start a reflecting activity");
             Console.WriteLine("\t4. Quit");
             Console.Write("Please type the number associated with your choice from the menu: ");
-            // Get the user's choice of activity
+            // Get the user's choice of activity and run that activity
             Activity activity = new Activity();
             string userChoice = activity.GetUserChoice();
             if (userChoice == "1")
             {
-                activity.DisplayStartingMessage();
                 BreathingActivity breathingActivity = new BreathingActivity();
+                breathingActivity.DisplayStartingMessage();
                 breathingActivity.Run();
+                breathingActivity.DisplayEndingMessage();
+            }
+            else if (userChoice == "2")
+            {
+                ListingActivity listingActivity = new ListingActivity();
+                listingActivity.DisplayStartingMessage();
+                listingActivity.Run();
+                listingActivity.DisplayEndingMessage();
             }
             else if (userChoice == "4")
             {

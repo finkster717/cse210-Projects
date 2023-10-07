@@ -13,37 +13,22 @@ public class Activity
 
     public string GetUserChoice()
     {
-        // Interpret from user input the name and description of the desired activity
+        // Get the user's choice
         string userChoice = Console.ReadLine();
-        if (userChoice == "1")
-        {
-            _name = "Breathing Activity";
-            _description = "This activity will help you relax by walking you through breathing in and out slowly. Clear your mind and focus on your breathing.";
-        }
-        else if (userChoice == "2")
-        {
-            _name = "Listing Activity";
-            _description = "This activity will...";
-        }
-        else if (userChoice == "3")
-        {
-            _name = "Reflecting Activity";
-            _description = "This activity will...";
-        }
         return userChoice;
     }
 
     public void DisplayStartingMessage()
     {
         Console.Clear();
-        Console.WriteLine($"\nWelcome to the {_name}.\n");
+        Console.WriteLine($"\nWelcome to the {_name.ToLower()}.\n");
         Console.WriteLine($"{_description}\n");
     }
 
     public void DisplayEndingMessage()
     {
-        Console.WriteLine("\nWell done!!!");
-        Console.WriteLine($"You have completed a {_duration} second breathing activity.");
+        Console.WriteLine("\nWell done!");
+        Console.WriteLine($"You have completed a {_duration} second {_name.ToLower()}.");
         Console.WriteLine("Returning to the main menu...");
         ShowSpinner(7);
     }
@@ -55,16 +40,16 @@ public class Activity
         {
             Console.Write("|");
             Thread.Sleep(250);
-            Console.Write("\b\b");
+            Console.Write("\b \b");
             Console.Write("/");
             Thread.Sleep(250);
-            Console.Write("\b\b");
+            Console.Write("\b \b");
             Console.Write("-");
             Thread.Sleep(250);
-            Console.Write("\b\b");
+            Console.Write("\b \b");
             Console.Write("\\");
             Thread.Sleep(250);
-            Console.Write("\b\b");
+            Console.Write("\b \b");
             timer ++;
         }
     }
