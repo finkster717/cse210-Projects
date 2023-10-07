@@ -4,7 +4,34 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine(5 / 10);
-
+        // Initialize loop to run the program
+        bool quit = false;
+        while (quit == false)
+        {
+            // Clear the console and add whitespace for ease of reading
+            Console.Clear();
+            Console.WriteLine();
+            // Present the menu options
+            Console.WriteLine("Menu Options:");
+            Console.WriteLine("\t1. Start a breathing activity");
+            Console.WriteLine("\t2. Start a listing activity");
+            Console.WriteLine("\t3. Start a reflecting activity");
+            Console.WriteLine("\t4. Quit");
+            Console.Write("Please type the number associated with your choice from the menu: ");
+            // Get the user's choice of activity
+            Activity activity = new Activity();
+            string userChoice = activity.GetUserChoice();
+            if (userChoice == "1")
+            {
+                activity.DisplayStartingMessage();
+                BreathingActivity breathingActivity = new BreathingActivity();
+                breathingActivity.Run();
+            }
+            else if (userChoice == "4")
+            {
+                Console.WriteLine("\nThank you, come again!\n");
+                quit = true;
+            }
+        }
     }
 }
