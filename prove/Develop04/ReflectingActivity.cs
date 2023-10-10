@@ -1,8 +1,3 @@
-// I exceeded requirements by making sure each reflecting activity question is unique.
-// I also made sure that the user cannot exceed a duration in the reflecting activity
-// that would cause repeat questions. This means the reflection activity can only go for
-// a maximum of 90 seconds.
-
 public class ReflectingActivity : Activity
 {
     private string _prompt;

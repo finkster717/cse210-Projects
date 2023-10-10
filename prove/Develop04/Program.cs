@@ -1,4 +1,8 @@
-using System;
+// I exceeded requirements by making sure each reflecting activity question is unique.
+// I also made sure that the user cannot exceed a duration in the reflecting activity
+// that would cause repeat questions. This means the reflection activity can only go for
+// a maximum of 90 seconds. I also added a goodbye animation when the user closes the 
+// program.
 
 class Program
 {
@@ -45,7 +49,19 @@ class Program
             }
             else if (userChoice == "4")
             {
-                Console.WriteLine("\nThank you, come again!\n");
+                Console.Write("\nGoodbye\t");
+                int count = 6;
+                int timer = 0;
+                while (timer < count)
+                {
+                    Console.Write("o/");
+                    Thread.Sleep(500);
+                    Console.Write("\b\b");
+                    Console.Write("o7");
+                    Thread.Sleep(500);
+                    Console.Write("\b\b");
+                    timer ++;
+                }
                 quit = true;
             }
         }
