@@ -13,7 +13,7 @@ public class ListingActivity : Activity
     public string GetRandomPrompt()
     {
         List<string> _prompts = new List<string>();
-        string filename = "Prompts.txt";
+        string filename = "ListingActivityPrompts.txt";
 
         string[] lines = System.IO.File.ReadAllLines(filename);
         foreach (string line in lines)
@@ -29,6 +29,11 @@ public class ListingActivity : Activity
         return randomPrompt;
     }
 
+    public int GetCount()
+    {
+        return _count;
+    }
+
     public void Run()
     {
         // Ask user how long the listing activity should run
@@ -37,15 +42,13 @@ public class ListingActivity : Activity
         Console.WriteLine($"This activity will run for {_duration} seconds.\n");
         // Get a random prompt ready
         _prompt = GetRandomPrompt();
-        // Give user 5 seconds before the listing activity starts
-        Console.WriteLine("Get ready...\n");
-        ShowSpinner(5);
-        // Show user the prompt and give 10 seconds to prepare
+        // Show user the prompt and give 9 seconds to prepare
         Console.WriteLine("List as many responses as you can to the given prompt:");
         Console.WriteLine($"---{_prompt}---");
         Console.Write("You may begin in: ");
         ShowCountDown(9);
-        Console.WriteLine("\b Begin");
+        Console.Write("\b ");
+        Console.WriteLine("Begin");
         // Begin the listing activity for the duration specified
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(_duration);
@@ -53,6 +56,7 @@ public class ListingActivity : Activity
         {
             Console.Write(">");
             Console.ReadLine();
+            _count ++;
         }
     }
 }

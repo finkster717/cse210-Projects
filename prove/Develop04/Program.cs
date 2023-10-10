@@ -33,7 +33,15 @@ class Program
                 ListingActivity listingActivity = new ListingActivity();
                 listingActivity.DisplayStartingMessage();
                 listingActivity.Run();
+                Console.WriteLine($"\nYou listed {listingActivity.GetCount()} responses.");
                 listingActivity.DisplayEndingMessage();
+            }
+            else if (userChoice == "3")
+            {
+                ReflectingActivity reflectingActivity = new ReflectingActivity();
+                reflectingActivity.DisplayStartingMessage();
+                reflectingActivity.Run();
+                reflectingActivity.DisplayEndingMessage();
             }
             else if (userChoice == "4")
             {
