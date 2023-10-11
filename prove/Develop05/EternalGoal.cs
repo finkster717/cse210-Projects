@@ -18,7 +18,7 @@ public class EternalGoal : Goal
 
     public override string GetStringRepresentation()
     {
-
-        return "";
+        string goalRepresentation = $"{_name} | {_description} | worth {_points} points per completion.";
+        return goalRepresentation;
     }
 }

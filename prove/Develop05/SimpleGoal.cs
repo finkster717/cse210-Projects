@@ -4,7 +4,7 @@ public class SimpleGoal : Goal
 
     public SimpleGoal(string name, string description, int points) : base(name, description, points)
     {
-        
+
     }
 
     public override void RecordEvent()
@@ -20,9 +20,7 @@ public class SimpleGoal : Goal
 
     public override string GetStringRepresentation()
     {
-
-        return "";
+        string goalRepresentation = $"{_name} | {_description} | worth {_points} points per completion.";
+        return goalRepresentation;
     }
-
-
 }

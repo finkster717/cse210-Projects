@@ -23,8 +23,8 @@ public class ChecklistGoal : Goal
 
     public override string GetStringRepresentation()
     {
-
-        return "";
+        string goalRepresentation = $"{_name} | {_description} | worth {_points} points per completion. After completing {_target} times, gain {_bonusPoints} points.";
+        return goalRepresentation;
     }
 
     public override string GetDetailsString()
