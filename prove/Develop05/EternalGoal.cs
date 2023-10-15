@@ -1,6 +1,6 @@
 public class EternalGoal : Goal
 {
-    public EternalGoal(string name, string description, int points) : base(name, description, points)
+    public EternalGoal(string type, string name, string description, int points) : base(type, name, description, points)
     {
         
     }
@@ -10,15 +10,14 @@ public class EternalGoal : Goal
 
     }
 
-    public override bool IsComplete()
+    public override void IsComplete()
     {
 
-        return true;
     }
 
     public override string GetStringRepresentation()
     {
-        string goalRepresentation = $"{_name} | {_description} | worth {_points} points per completion.";
+        string goalRepresentation = $"\t{_name} | {_description} | worth {_points} points per completion.";
         return goalRepresentation;
     }
 }

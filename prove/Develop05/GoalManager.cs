@@ -40,7 +40,7 @@ public class GoalManager
             else if (int.Parse(userInput) == 2)
             {
                 ListGoalDetails();
-                Console.WriteLine();
+                Console.WriteLine("Press ENTER when finished");
                 Console.ReadLine();
             }
             else if (int.Parse(userInput) == 3)
@@ -53,7 +53,9 @@ public class GoalManager
             }
             else if (int.Parse(userInput) == 5)
             {
-
+                ListGoalDetails();
+                Console.WriteLine();
+                RecordEvent();
             }
             else if (int.Parse(userInput) == 6)
             {   
@@ -86,8 +88,9 @@ public class GoalManager
     {
         foreach (Goal goal in _goals)
         {
-        string line = goal.GetStringRepresentation();
-        Console.WriteLine(line);
+            int goalIndex = _goals.IndexOf(goal) + 1;
+            string line = goalIndex.ToString() + ". " + goal.GetStringRepresentation();
+            Console.WriteLine(line);
         }
     }
 
@@ -108,11 +111,11 @@ public class GoalManager
 
         if (goalType == 1)
         {
-            _goals.Add(new SimpleGoal(goalName, goalDescription, goalPoints));
+            _goals.Add(new SimpleGoal("simple", goalName, goalDescription, goalPoints, false));
         }
         else if (goalType == 2)
         {
-            _goals.Add(new EternalGoal(goalName, goalDescription, goalPoints));
+            _goals.Add(new EternalGoal("eternal", goalName, goalDescription, goalPoints));
         }
         else if (goalType == 3)
         {
@@ -120,26 +123,75 @@ public class GoalManager
             int target = int.Parse(Console.ReadLine());
             Console.Write($"How many bonus points for completing the goal that many times? >");
             int bonusPoints = int.Parse(Console.ReadLine());
-            _goals.Add(new ChecklistGoal(goalName, goalDescription, goalPoints, target, bonusPoints));
+            _goals.Add(new ChecklistGoal("checklist", goalName, goalDescription, goalPoints, target, bonusPoints, 0, false));
         }
     }
 
     public void RecordEvent()
     {
-
+        Console.WriteLine("Please type the number associated with your choice...");
+        Console.Write("Which goal would you like to report progress on? ");
+        int completedGoalIndex = int.Parse(Console.ReadLine()) - 1;
+        foreach (Goal goal in _goals)
+        {
+            if (_goals.IndexOf(goal) == completedGoalIndex)
+            {
+                string goalType = goal.GetGoalType();
+                if (goalType == "simple")
+                {
+                    goal.IsComplete();
+                    AddPoints(goal.GetPoints());
+                    Console.WriteLine("CONGRATULATIONS!");
+                    Console.WriteLine($"Your {goalType} goal has been marked complete.");
+                    Console.WriteLine("\nPlease press ENTER when you are ready to return to the main menu");
+                }
+                else if (goalType == "eternal")
+                {
+                    Console.WriteLine("Still working on this part, will not be updated...");
+                    Console.WriteLine("\nPlease press ENTER when you are ready to return to the main menu");
+                }
+                else if (goalType == "checklist")
+                {
+                    AddPoints(goal.GetPoints());
+                    goal.RecordEvent();
+                    AddPoints(goal.GetPoints());
+                    Console.WriteLine("CONGRATULATIONS!");
+                    Console.WriteLine($"Your progress toward your {goalType} goal has been recorded.");
+                    Console.WriteLine("\nPlease press ENTER when you are ready to return to the main menu");
+                }
+            }
+        }
     }
 
+    public void AddPoints(int pointsToAdd)
+    {
+        _score += pointsToAdd;
+    }
+
+/* Figure this out later...
     public void SaveGoals()
     {
+        Console.Write("What would you like to name your save file? ");
+        string fileName = Console.ReadLine();
 
+        using (StreamWriter outputFile = new StreamWriter(filename))
+        {
+            // You can add text to the file with the WriteLine method
+            outputFile.WriteLine("This will be the first line in the file.");
+        
+            // You can use the $ and include variables just like with Console.WriteLine
+            string color = "Blue";
+            outputFile.WriteLine($"My favorite color is {color}");
+        }
     }
+
 
     public void LoadGoals()
     {
 
     }
+*/
 
-    // Goodbye animation!
     static void GoodbyeAnimation()
     {
         Console.Clear();
