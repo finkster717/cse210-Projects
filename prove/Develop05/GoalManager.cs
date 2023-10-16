@@ -33,6 +33,7 @@ public class GoalManager
             string userInput = Console.ReadLine();
             Console.WriteLine(); // WhiteSpace
 
+            // What to do for each option
             if (int.Parse(userInput) == 1)
             {
                 CreateGoal();
