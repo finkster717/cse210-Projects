@@ -5,25 +5,28 @@ public abstract class Goal
     protected string _name;
     protected string _description;
     protected int _points;
+    protected bool _isComplete;
 
     // Constructing constructor
-    public Goal(string type, string name, string description, int points)
+    public Goal(string type, string name, string description, int points, bool isComplete)
     {
         _type = type;
         _name = name;
         _description = description;
         _points = points;
+        _isComplete = isComplete;
     }
 
     // Declaring abstract methods
     public abstract void RecordEvent();
-    public abstract void IsComplete();
+    public abstract void SetComplete();
+    public abstract bool IsComplete();
     public abstract string GetStringRepresentation();
 
     // Declaring virtual method, will be overridden by ChecklistGoal
     public virtual string GetDetailsString()
     {
-        string goalDetails = $"Name: {_name} | Description: {_description} | Points On Complete: {_points} | ";
+        string goalDetails = $"{_type}|{_name}|{_description}|{_points}|{_isComplete}";
         return goalDetails;
     }
 

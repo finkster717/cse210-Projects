@@ -45,11 +45,11 @@ public class GoalManager
             }
             else if (int.Parse(userInput) == 3)
             {
-
+                SaveGoals();
             }
             else if (int.Parse(userInput) == 4)
             {
-
+                LoadGoals();
             }
             else if (int.Parse(userInput) == 5)
             {
@@ -139,25 +139,46 @@ public class GoalManager
                 string goalType = goal.GetGoalType();
                 if (goalType == "simple")
                 {
-                    goal.IsComplete();
-                    AddPoints(goal.GetPoints());
-                    Console.WriteLine("CONGRATULATIONS!");
-                    Console.WriteLine($"Your {goalType} goal has been marked complete.");
-                    Console.WriteLine("\nPlease press ENTER when you are ready to return to the main menu");
+                    if (goal.IsComplete() == true)
+                    {
+                        Console.WriteLine("That goal is already marked complete.\nPress ENTER to return to the main menu.");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        goal.SetComplete();
+                        AddPoints(goal.GetPoints());
+                        Console.WriteLine("CONGRATULATIONS!");
+                        Console.WriteLine($"Your {goalType} goal has been marked complete.");
+                        Console.WriteLine("\nPlease press ENTER when you are ready to return to the main menu");
+                    }
                 }
                 else if (goalType == "eternal")
                 {
-                    Console.WriteLine("Still working on this part, will not be updated...");
-                    Console.WriteLine("\nPlease press ENTER when you are ready to return to the main menu");
+                    AddPoints(goal.GetPoints());
+                    Console.WriteLine("CONGRATULATIONS!");
+                    Console.WriteLine($"Your {goalType} goal's points have been added to your score.");
+                    Console.WriteLine("\nPlease press ENTER when you are ready to return to the main menu.");
                 }
                 else if (goalType == "checklist")
                 {
-                    AddPoints(goal.GetPoints());
-                    goal.RecordEvent();
-                    AddPoints(goal.GetPoints());
-                    Console.WriteLine("CONGRATULATIONS!");
-                    Console.WriteLine($"Your progress toward your {goalType} goal has been recorded.");
-                    Console.WriteLine("\nPlease press ENTER when you are ready to return to the main menu");
+                    if (goal.IsComplete() == true)
+                    {
+                        Console.WriteLine("That goal is already marked complete.\nPress ENTER to return to the main menu.");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        AddPoints(goal.GetPoints());
+                        goal.RecordEvent();
+                        if (goal.IsComplete() == true)
+                        {
+                            AddPoints(goal.GetPoints());
+                        }
+                        Console.WriteLine("CONGRATULATIONS!");
+                        Console.WriteLine($"Your progress toward your {goalType} goal has been recorded.");
+                        Console.WriteLine("\nPlease press ENTER when you are ready to return to the main menu.");
+                    }
                 }
             }
         }
@@ -168,29 +189,69 @@ public class GoalManager
         _score += pointsToAdd;
     }
 
-/* Figure this out later...
     public void SaveGoals()
     {
         Console.Write("What would you like to name your save file? ");
         string fileName = Console.ReadLine();
 
-        using (StreamWriter outputFile = new StreamWriter(filename))
+        using (StreamWriter outputFile = new StreamWriter(fileName))
         {
-            // You can add text to the file with the WriteLine method
-            outputFile.WriteLine("This will be the first line in the file.");
-        
-            // You can use the $ and include variables just like with Console.WriteLine
-            string color = "Blue";
-            outputFile.WriteLine($"My favorite color is {color}");
+            outputFile.WriteLine($"{_score}");
+            foreach (Goal goal in _goals)
+            {
+            outputFile.WriteLine($"{goal.GetDetailsString()}");
+            }
         }
     }
 
-
     public void LoadGoals()
     {
+        Console.Write("What is the name of your save file: ");
+        string fileName = Console.ReadLine();
+        string[] lines = System.IO.File.ReadAllLines(fileName);
+        _score = int.Parse(lines.First());
+        lines.Skip(1);
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split("|");
 
+            string type = parts[0];
+            if (type == "checklist")
+            {
+                LoadChecklistGoal(parts[0], parts[1], parts[2], int.Parse(parts[3]), int.Parse(parts[4]), int.Parse(parts[5]), int.Parse(parts[6]), bool.Parse(parts[7]));
+            }
+            else if (type == "simple")
+            {
+                LoadSimpleGoal(parts[0], parts[1], parts[2], int.Parse(parts[3]), bool.Parse(parts[4]));
+            }
+            else if (type == "eternal")
+            {
+                LoadEternalGoal(parts[0], parts[1], parts[2], int.Parse(parts[3]));
+            }
+            else
+            {
+                continue;
+            }
+        }
     }
-*/
+
+    public void LoadSimpleGoal(string type, string name, string description, int points, bool isComplete)
+    {
+        SimpleGoal simpleGoal = new SimpleGoal(type, name, description, points, isComplete);
+        _goals.Add(simpleGoal);
+    }
+
+    public void LoadEternalGoal(string type, string name, string description, int points)
+    {
+        EternalGoal eternalGoal = new EternalGoal(type, name, description, points);
+        _goals.Add(eternalGoal);
+    }
+
+    public void LoadChecklistGoal(string type, string name, string description, int points, int target, int bonusPoints, int amountCompleted, bool isComplete)
+    {
+        ChecklistGoal checklistGoal = new ChecklistGoal(type, name, description, points, target, bonusPoints, amountCompleted, isComplete);
+        _goals.Add(checklistGoal);
+    }
 
     static void GoodbyeAnimation()
     {

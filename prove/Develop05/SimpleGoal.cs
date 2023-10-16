@@ -1,10 +1,8 @@
 public class SimpleGoal : Goal
 {
-    private bool _isComplete;
-
-    public SimpleGoal(string type, string name, string description, int points, bool isComplete) : base(type, name, description, points)
+    public SimpleGoal(string type, string name, string description, int points, bool isComplete) : base(type, name, description, points, isComplete)
     {
-        isComplete = _isComplete;
+        
     }
 
     public override void RecordEvent()
@@ -12,9 +10,21 @@ public class SimpleGoal : Goal
         
     }
 
-    public override void IsComplete()
+    public override void SetComplete()
     {
         _isComplete = true;
+    }
+
+    public override bool IsComplete()
+    {
+        if (_isComplete == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public override string GetStringRepresentation()

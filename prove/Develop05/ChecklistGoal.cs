@@ -3,14 +3,12 @@ public class ChecklistGoal : Goal
     private int _amountCompleted;
     private int _target;
     private int _bonusPoints;
-    private bool _isComplete;
 
-    public ChecklistGoal(string type, string name, string description, int points, int target, int bonusPoints, int amountCompleted, bool isComplete) : base(type, name, description, points)
+    public ChecklistGoal(string type, string name, string description, int points, int target, int bonusPoints, int amountCompleted, bool isComplete) : base(type, name, description, points, isComplete)
     {
         _target = target;
         _bonusPoints = bonusPoints;
         _amountCompleted = amountCompleted;
-        isComplete = _isComplete;
     }
 
     public override void RecordEvent()
@@ -19,7 +17,7 @@ public class ChecklistGoal : Goal
         Console.WriteLine($"Your progress: {_amountCompleted}/{_target}");
         if (_amountCompleted == _target)
         {
-            IsComplete();
+            SetComplete();
         }
     }
 
@@ -35,9 +33,21 @@ public class ChecklistGoal : Goal
         }
     }
 
-    public override void IsComplete()
+    public override void SetComplete()
     {
         _isComplete = true;
+    }
+
+    public override bool IsComplete()
+    {
+        if (_isComplete == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public override string GetStringRepresentation()
@@ -56,7 +66,7 @@ public class ChecklistGoal : Goal
 
     public override string GetDetailsString()
     {
-        string goalDetails = $"Name: {_name} | Description: {_description} | Points Per Completion: {_points} | Points On Complete: {_bonusPoints}";
+        string goalDetails = $"{_type}|{_name}|{_description}|{_points}|{_target}|{_bonusPoints}|{_amountCompleted}|{_isComplete}";
         return goalDetails;
     }
 }
