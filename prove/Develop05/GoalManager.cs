@@ -207,6 +207,7 @@ public class GoalManager
 
     public void LoadGoals()
     {
+        _goals.Clear();
         Console.Write("What is the name of your save file: ");
         string fileName = Console.ReadLine();
         string[] lines = System.IO.File.ReadAllLines(fileName);
