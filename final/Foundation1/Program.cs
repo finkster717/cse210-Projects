@@ -32,12 +32,14 @@ class Program
         videos.Add(new Video("Preparing Second Breakfast", "Peregrin Took", 350, video2Comments));
         videos.Add(new Video("How To Forge A Ring Of Power", "Sauron", 900, video3Comments));
 
+        // Display the content
         foreach (Video video in videos)
         {
             video.DisplayVideoDetails();
             video.DisplayAllComments();
             Console.WriteLine();
         }
+
         Console.Write("Press ENTER to end the program... ");
         Console.ReadLine();
     }
