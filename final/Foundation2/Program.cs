@@ -9,7 +9,7 @@ class Program
         order1Products.Add(new Product("Baby Monitor", "H48735", 19.99, 1));
         order1Products.Add(new Product("Diapers 76 pack", "Q79822", 39.95, 2));
         // Setting customer data for first order
-        Address customer1Address = new Address("1111 SOMEWHERE DRIVE", "CLEVELAND", "OHIO", "USA");
+        Address customer1Address = new Address("1111 SOMEWHERE DRIVE", "FLATWOODS", "KENTUCKY", "USA");
         Customer order1Customer = new Customer("Billy Ray", customer1Address);
         Order order1 = new Order(order1Products, order1Customer);
 
