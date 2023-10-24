@@ -11,10 +11,12 @@ public class Running : Activity
     {
         return _distance;
     }
+    
     public override float GetSpeed()
     {
-        return (_distance / _time) * 60;
+        return _distance / _time * 60;
     }
+    
     public override float GetPace()
     {
         return _time / _distance;

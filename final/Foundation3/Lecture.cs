@@ -19,7 +19,7 @@ public class Lecture : Event
         return _capacity;
     }
 
-        public override string GetFullDetails()
+    public override string GetFullDetails()
     {
         return $"{_eventTitle} | {_eventType}\n{_description}\n{_date} at {_time}\n{_address}\nSpeaker: {_speaker}\nMaximum Occupancy: {_capacity}";
     }

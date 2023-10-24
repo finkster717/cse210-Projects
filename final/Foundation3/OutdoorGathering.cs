@@ -12,7 +12,7 @@ public class OutdoorGathering : Event
         return _weatherForecast;
     }
 
-        public override string GetFullDetails()
+    public override string GetFullDetails()
     {
         return $"{_eventTitle} | {_eventType}\n{_description}\n{_date} at {_time}\n{_address}\nWeather Forecast: {_weatherForecast}";
     }

@@ -11,14 +11,14 @@ public class Cycling : Activity
     {
         return _speed * (_time / 60);
     }
+
     public override float GetSpeed()
     {
         return _speed;
     }
+
     public override float GetPace()
     {
         return _time / _speed;
     }
-
-
 }
